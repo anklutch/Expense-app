@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:expensetrackapp/models/expense.dart';
+import 'package:expensetrackapp/expenses_list.dart'; // Adjust the path if necessary
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _ExpensesState();
@@ -12,7 +14,7 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
     Expense(
-      title: 'FLutter course',
+      title: 'Flutter course',
       amount: 19.99,
       date: DateTime.now(),
       catetory: Catetory.learn
@@ -30,11 +32,18 @@ class _ExpensesState extends State<Expenses> {
       catetory: Catetory.work
     )
   ];
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(title: const Text('Expenses Tracker')),
       body: Column(
-        children: [Text('The chart'), Text('Expenses list ...')],
+        children: [
+          const Text('The chart'),
+          Expanded(
+            child: ExpensesList(expenses: _registeredExpenses),
+          ),
+        ],
       ),
     );
   }
